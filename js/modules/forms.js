@@ -7,7 +7,7 @@ function forms(formSelector, modalTimerId) {
     const forms = document.querySelectorAll(formSelector);
     
     const message = {
-        loading: '/img/form/054 spinner.svg',
+        loading: '/img/form/spinner.svg',
         succes: 'Спасибо! Скоро мы с вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
@@ -35,7 +35,6 @@ function forms(formSelector, modalTimerId) {
 
             postData('http://localhost:3000/requests', json)
             .then(data => {
-                console.log(data);
                 showThanksModal (message.succes);
                 statusMessage.remove();
             }).catch(() => {

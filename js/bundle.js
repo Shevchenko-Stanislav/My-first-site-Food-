@@ -169,25 +169,33 @@ function cards() {
                 <div class="menu__item-divider"></div>
                 <div class="menu__item-price">
                     <div class="menu__item-cost">Цена:</div>
-                    <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                    <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
                 </div>
         `;
       this.parent.append(element);
     }
 
-  }
+  } // getResource('http://localhost:3000/menu')
+  //     .then(data => {
+  //         data.forEach(({img, altimg, title, descr, price}) => {
+  //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+  //         });
+  //     });
+  // Запрос на сервер реализован, но т.к. у меня нет возможности
+  // обратиться к реальной базе данных, мы будем использовать воображение
+  // и готовый массив из '../services/services'.
 
-  (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.getResource)('http://localhost:3000/menu').then(data => {
-    data.forEach(_ref => {
-      let {
-        img,
-        altimg,
-        title,
-        descr,
-        price
-      } = _ref;
-      new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-    });
+
+  const serverResponse = (0,_services_services__WEBPACK_IMPORTED_MODULE_0__.getResource)();
+  serverResponse.forEach(_ref => {
+    let {
+      img,
+      altimg,
+      title,
+      descr,
+      price
+    } = _ref;
+    new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
   });
 }
 
@@ -212,7 +220,7 @@ function forms(formSelector, modalTimerId) {
   // Forms
   const forms = document.querySelectorAll(formSelector);
   const message = {
-    loading: '/img/form/054 spinner.svg',
+    loading: '/img/form/spinner.svg',
     succes: 'Спасибо! Скоро мы с вами свяжемся',
     failure: 'Что-то пошло не так...'
   };
@@ -234,7 +242,6 @@ function forms(formSelector, modalTimerId) {
       const formData = new FormData(form);
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
       (0,_services_services__WEBPACK_IMPORTED_MODULE_1__.postData)('http://localhost:3000/requests', json).then(data => {
-        console.log(data);
         showThanksModal(message.succes);
         statusMessage.remove();
       }).catch(() => {
@@ -625,16 +632,36 @@ const postData = async (url, data) => {
     body: data
   });
   return await res.json();
-};
+}; // const getResource = async (url) => {
+//     const res = await fetch(url);
+//     if (!res.ok) {
+//         throw new Error (`Not fetch ${url}, status: ${res.status}`);
+//     }
+//     return await res.json();
+// };
+// Представим, что в результате запроса на сервер мы получили данные ниже.
 
-const getResource = async url => {
-  const res = await fetch(url);
 
-  if (!res.ok) {
-    throw new Error(`Not fetch ${url}, status: ${res.status}`);
-  }
-
-  return await res.json();
+const getResource = () => {
+  return [{
+    "img": "img/tabs/vegy.jpg",
+    "altimg": "vegy",
+    "title": "Меню 'Фитнес'",
+    "descr": "Меню 'Фитнес' - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!",
+    "price": 9
+  }, {
+    "img": "img/tabs/post.jpg",
+    "altimg": "post",
+    "title": "Меню 'Постное'",
+    "descr": "Меню 'Постное' - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.",
+    "price": 14
+  }, {
+    "img": "img/tabs/elite.jpg",
+    "altimg": "elite",
+    "title": "Меню 'Премиум'",
+    "descr": "В меню 'Премиум' мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!",
+    "price": 21
+  }];
 };
 
 
@@ -1115,7 +1142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (0,_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])('form', modalTimerId);
   (0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])("[data-modal]", '.modal', modalTimerId);
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
-  (0,_modules_timer__WEBPACK_IMPORTED_MODULE_2__["default"])('.timer', '2022-04-21');
+  (0,_modules_timer__WEBPACK_IMPORTED_MODULE_2__["default"])('.timer', '2022-06-21');
   (0,_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])({
     container: '.offer__slider',
     nextArrow: '.offer__slider-next',
