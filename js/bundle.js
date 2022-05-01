@@ -220,9 +220,9 @@ function forms(formSelector, modalTimerId) {
   // Forms
   const forms = document.querySelectorAll(formSelector);
   const message = {
-    loading: '/icons/spinner.svg',
+    loading: 'Загрузка...',
     succes: 'Спасибо! Скоро мы с вами свяжемся',
-    failure: 'Что-то пошло не так...'
+    failure: 'Это учебный проект, он не отправляет данные'
   };
   forms.forEach(item => {
     bindPostData(item);
@@ -231,9 +231,14 @@ function forms(formSelector, modalTimerId) {
   function bindPostData(form) {
     form.addEventListener('submit', event => {
       event.preventDefault();
-      const statusMessage = document.createElement('img');
-      statusMessage.src = message.loading;
+      const statusMessage = document.createElement('div');
+      statusMessage.innerHTML = message.loading;
       statusMessage.style.cssText = `
+                text-align: center;
+                padding-top: 10px;
+                font-size: 12px;
+                width: 100px;
+                height: 30px;
                 display: block;
                 margin: 0 auto;
             `;
@@ -241,13 +246,15 @@ function forms(formSelector, modalTimerId) {
       form.insertAdjacentElement('afterend', statusMessage);
       const formData = new FormData(form);
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
-      (0,_services_services__WEBPACK_IMPORTED_MODULE_1__.postData)('http://localhost:3000/requests', json).then(data => {
+      (0,_services_services__WEBPACK_IMPORTED_MODULE_1__.postData)('URL', json).then(data => {
         showThanksModal(message.succes);
         statusMessage.remove();
       }).catch(() => {
         showThanksModal(message.failure);
+        statusMessage.remove();
       }).finally(() => {
         form.reset();
+        statusMessage.remove();
       });
     });
   }
@@ -1137,9 +1144,9 @@ __webpack_require__(/*! nodelist-foreach-polyfill */ "./node_modules/nodelist-fo
 
 document.addEventListener('DOMContentLoaded', () => {
   const modalTimerId = setTimeout(() => (0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__.openModal)('.modal', modalTimerId), 300000);
+  (0,_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])('form', modalTimerId);
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_5__["default"])();
   (0,_modules_cards__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  (0,_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])('form', modalTimerId);
   (0,_modules_modal__WEBPACK_IMPORTED_MODULE_1__["default"])("[data-modal]", '.modal', modalTimerId);
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active');
   (0,_modules_timer__WEBPACK_IMPORTED_MODULE_2__["default"])('.timer', '2022-06-21');

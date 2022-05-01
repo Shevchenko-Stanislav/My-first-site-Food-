@@ -7,9 +7,9 @@ function forms(formSelector, modalTimerId) {
     const forms = document.querySelectorAll(formSelector);
     
     const message = {
-        loading: '/icons/spinner.svg',
+        loading: 'Загрузка...',
         succes: 'Спасибо! Скоро мы с вами свяжемся',
-        failure: 'Что-то пошло не так...'
+        failure: 'Это учебный проект, он не отправляет данные'
     };
 
     forms.forEach(item => {
@@ -20,31 +20,38 @@ function forms(formSelector, modalTimerId) {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const statusMessage = document.createElement('img');
-            statusMessage.src = message.loading;
+            const statusMessage = document.createElement('div');
+            statusMessage.innerHTML = message.loading;
             statusMessage.style.cssText = `
+                text-align: center;
+                padding-top: 10px;
+                font-size: 12px;
+                width: 100px;
+                height: 30px;
                 display: block;
                 margin: 0 auto;
             `;
-            form.append(statusMessage); 
+            form.append(statusMessage);
             form.insertAdjacentElement('afterend', statusMessage);
 
             const formData = new FormData(form);
 
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-            postData('http://localhost:3000/requests', json)
+            postData('URL', json)
             .then(data => {
                 showThanksModal (message.succes);
                 statusMessage.remove();
             }).catch(() => {
                 showThanksModal(message.failure);
+                statusMessage.remove();
             }).finally(() => {
                 form.reset();
+                statusMessage.remove();
             });
         });
     }
-
+    
     function showThanksModal (message) {
         const modalDialog = document.querySelector('.modal__dialog');
 
