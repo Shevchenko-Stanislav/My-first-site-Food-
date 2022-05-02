@@ -4,7 +4,10 @@ Description so far only in Russian.
 
 Это мой проект написанный с использование HTML, CSS, и нативного JS.
 
-Вы пожете посмотреть на результат [перейдя по ссылке.](https://shevchenko-stanislav.github.io/Native-JS-site-FOOD--/) 
+Вы пожете посмотреть на результат [перейдя по ссылке.](https://shevchenko-stanislav.github.io/Native-JS-site-FOOD--/)
+####ВНИМАНИЕ!\
+Проект по ссылке не имеет адаптивную верстку и на малых экранах может выглядеть не очень хорошо.\
+Пример адаптивной верстки вы можете посмотреть по [ссылке.](https://shevchenko-stanislav.github.io/Adaptive-website/)
 
 При помощи JS реализован следующий функционал:
 
