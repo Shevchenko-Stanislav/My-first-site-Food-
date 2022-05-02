@@ -7,7 +7,7 @@ Description so far only in Russian.
 Вы пожете посмотреть на результат [перейдя по ссылке.](https://shevchenko-stanislav.github.io/Native-JS-site-FOOD--/)
 #### ВНИМАНИЕ!
 **Проект по ссылке не имеет адаптивную верстку и на малых экранах может выглядеть не очень хорошо.**\
-**Пример адаптивной верстки вы можете посмотреть по [ссылке.](https://shevchenko-stanislav.github.io/Adaptive-website/)
+**Пример адаптивной верстки вы можете посмотреть по** [ссылке.](https://shevchenko-stanislav.github.io/Adaptive-website/)
 
 При помощи JS реализован следующий функционал:
 
